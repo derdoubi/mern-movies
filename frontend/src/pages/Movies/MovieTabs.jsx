@@ -2,62 +2,70 @@ import { Link } from "react-router-dom";
 
 const MovieTabs = ({ userInfo, submitHandler, comment, setComment, movie }) => {
   return (
-    <div className="mt-6">
+    <div className="space-y-12">
       {/* Review Form Section */}
-      <section>
+      <section className="bg-[#1a1a1a] rounded-xl p-6 border border-white/10">
+        <h2 className="text-2xl font-bold text-white mb-6">Write a Review</h2>
+        
         {userInfo ? (
           <form onSubmit={submitHandler} className="space-y-4">
             <div>
-              <label htmlFor="comment" className="block text-xl font-semibold mb-2">
-                Write Your Review
-              </label>
               <textarea
-                id="comment"
-                rows="5"
-                required
+                rows="4"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                className="w-full p-4 border rounded-lg text-black bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                placeholder="Your review..."
-                aria-label="Write your review"
-              ></textarea>
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                placeholder="Share your thoughts about the movie..."
+              />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700 transition duration-300"
+              className="w-full md:w-auto px-8 py-3 bg-gradient-to-r from-purple-600 to-blue-500 text-white font-medium rounded-lg hover:opacity-90 transition-opacity duration-200"
             >
               Submit Review
             </button>
           </form>
         ) : (
-          <p className="text-center text-xl mt-4">
-            Please <Link to="/login" className="text-teal-500">Sign In</Link> to write a review.
-          </p>
+          <div className="text-center py-4">
+            <p className="text-gray-400 mb-4">
+              Please sign in to write a review
+            </p>
+            <Link
+              to="/login"
+              className="inline-block px-6 py-2 bg-[#2a2a2a] text-white rounded-lg hover:bg-[#3a3a3a] transition-colors duration-200"
+            >
+              Sign In
+            </Link>
+          </div>
         )}
       </section>
 
       {/* Reviews Section */}
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
+      <section className="space-y-6">
+        <h2 className="text-2xl font-bold text-white">
+          Reviews ({movie?.reviews?.length || 0})
+        </h2>
 
-        {movie?.reviews.length === 0 ? (
-          <p className="text-center text-lg">No Reviews Yet</p>
+        {movie?.reviews?.length === 0 ? (
+          <p className="text-center text-gray-400 py-8">No reviews yet. Be the first to review!</p>
         ) : (
           <div className="space-y-6">
-            {movie?.reviews.map((review) => (
+            {movie?.reviews?.map((review) => (
               <div
                 key={review._id}
-                className="bg-[#1A1A1A] p-6 rounded-lg shadow-md"
+                className="bg-[#1a1a1a] rounded-xl p-6 border border-white/10 space-y-4"
               >
-                <div className="flex justify-between items-center mb-4">
-                  <strong className="text-xl text-[#B0B0B0]">{review.name}</strong>
-                  <p className="text-sm text-[#B0B0B0]">
-                    {review.createdAt.substring(0, 10)}
-                  </p>
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-white">
+                    {review.name}
+                  </h3>
+                  <span className="text-sm text-gray-400">
+                    {new Date(review.createdAt).toLocaleDateString()}
+                  </span>
                 </div>
 
-                <p className="text-lg text-white">{review.comment}</p>
+                <p className="text-gray-300">{review.comment}</p>
               </div>
             ))}
           </div>

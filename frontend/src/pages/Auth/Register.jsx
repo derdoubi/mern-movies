@@ -45,88 +45,108 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex flex-col md:flex-row items-center justify-center px-6 py-12">
-      <div className="max-w-md w-full bg-zinc-900 border border-zinc-700 p-8 rounded-xl shadow-2xl">
-        <h2 className="text-3xl font-bold text-cyan-400 text-center">Create an Account</h2>
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md relative">
+        {/* Background Gradient Effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20 blur-3xl" />
+        
+        <section className="relative bg-[#1a1a1a] p-8 rounded-xl shadow-2xl border border-white/10 backdrop-blur-sm">
+          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 text-center mb-8">
+            Create Account
+          </h1>
 
-        <form onSubmit={submitHandler} className="mt-6 space-y-5">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-1 text-zinc-300">Name</label>
-            <input
-              type="text"
-              id="name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter your name"
-              className="w-full bg-zinc-800 border border-zinc-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
-            />
-          </div>
+          <form onSubmit={submitHandler} className="space-y-6">
+            {/* Username */}
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium text-gray-200 mb-2">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1 text-zinc-300">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="w-full bg-zinc-800 border border-zinc-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
-            />
-          </div>
+            {/* Email */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="password" className="block text-sm font-medium mb-1 text-zinc-300">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              className="w-full bg-zinc-800 border border-zinc-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
-            />
-          </div>
+            {/* Password */}
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              />
+            </div>
 
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium mb-1 text-zinc-300">Confirm Password</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Re-enter your password"
-              className="w-full bg-zinc-800 border border-zinc-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
-            />
-          </div>
+            {/* Confirm Password */}
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-200 mb-2">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              />
+            </div>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-4 rounded-md transition disabled:opacity-50"
-          >
-            {isLoading ? "Registering..." : "Register"}
-          </button>
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:opacity-90
+                      rounded-lg font-semibold text-white transition-all duration-200 
+                      focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 
+                      focus:ring-offset-[#1a1a1a] disabled:opacity-50"
+            >
+              {isLoading ? "Creating Account..." : "Create Account"}
+            </button>
 
-          {isLoading && <div className="flex justify-center mt-4"><Loader /></div>}
-        </form>
+            {isLoading && <div className="flex justify-center"><Loader /></div>}
+          </form>
 
-        <p className="mt-6 text-center text-sm text-zinc-400">
-          Already have an account?{" "}
-          <Link
-            to={redirect ? `/login?redirect=${redirect}` : "/login"}
-            className="text-cyan-400 hover:underline"
-          >
-            Login
-          </Link>
-        </p>
-      </div>
-
-      {/* Right-side image */}
-      <div className="hidden md:block md:ml-12 lg:ml-20">
-        <img
-          src="/api/placeholder/600/500"
-          alt="Movie Theater"
-          className="rounded-xl shadow-xl border border-zinc-700 w-full max-w-sm"
-        />
+          {/* Footer */}
+          <p className="mt-6 text-center text-sm text-gray-400">
+            Already have an account?{" "}
+            <Link
+              to={redirect ? `/login?redirect=${redirect}` : "/login"}
+              className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 
+                       hover:opacity-80 transition-opacity"
+            >
+              Sign in
+            </Link>
+          </p>
+        </section>
       </div>
     </div>
   );

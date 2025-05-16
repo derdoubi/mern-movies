@@ -8,7 +8,7 @@ const Home = () => {
       <Header />
 
       {/* Movies Section */}
-      <section className="mt-10 px-4 sm:px-6 lg:px-20">
+      <section className="container mx-auto px-4 py-6 max-w-screen-xl">
         <MoviesContainerPage />
       </section>
     </div>

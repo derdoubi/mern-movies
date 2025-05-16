@@ -24,7 +24,7 @@ const AllComments = () => {
   };
 
   if (isLoading) {
-    return <div className="text-center py-8">Loading comments...</div>;
+    return <div className="text-center py-8 text-white/80">Loading comments...</div>;
   }
 
   if (error) {
@@ -32,37 +32,49 @@ const AllComments = () => {
   }
 
   return (
-    <div className="py-8">
+    <div className="min-h-screen bg-[#0a0a0a] py-12 px-4">
       {movies?.map((movie) => (
         <section
           key={movie._id}
-          className="flex flex-col justify-center items-center space-y-8"
+          className="max-w-4xl mx-auto mb-12"
         >
-          <div className="text-white text-xl font-bold mb-4">
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-8 text-center">
             {movie.name} - Comments
-          </div>
+          </h2>
+          
           {movie.reviews?.length === 0 && (
-            <div className="text-gray-500">No comments yet.</div>
+            <div className="text-white/60 text-center">No comments yet.</div>
           )}
-          {movie?.reviews?.map((review) => (
-            <div
-              key={review._id}
-              className="bg-[#1A1A1A] p-4 rounded-lg w-[90%] sm:w-[70%] lg:w-[50%] mt-[2rem] mx-auto"
-            >
-              <div className="flex justify-between text-[#B0B0B0]">
-                <strong>{review.name}</strong>
-                <p>{review.createdAt.substring(0, 10)}</p>
-              </div>
-              <p className="my-4 text-white">{review.comment}</p>
-
-              <button
-                className="text-red-500 mt-2"
-                onClick={() => handleDeleteComment(movie._id, review._id)}
+          
+          <div className="space-y-6">
+            {movie?.reviews?.map((review) => (
+              <div
+                key={review._id}
+                className="bg-[#1a1a1a] p-6 rounded-xl border border-white/10 shadow-lg transform transition-all duration-300 hover:shadow-xl hover:border-white/20"
               >
-                Delete
-              </button>
-            </div>
-          ))}
+                <div className="flex justify-between items-center text-white/70 mb-4">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-600 to-blue-500 flex items-center justify-center text-white">
+                      {review.name.charAt(0).toUpperCase()}
+                    </div>
+                    <strong>{review.name}</strong>
+                  </div>
+                  <p className="text-sm">{review.createdAt.substring(0, 10)}</p>
+                </div>
+                
+                <p className="text-white/90 mb-4">{review.comment}</p>
+
+                <div className="flex justify-end">
+                  <button
+                    className="px-4 py-2 rounded-lg bg-red-500/10 text-red-500 font-semibold transition-all duration-300 hover:bg-red-500/20 focus:outline-none focus:ring-2 focus:ring-red-500/50"
+                    onClick={() => handleDeleteComment(movie._id, review._id)}
+                  >
+                    Delete Comment
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
       ))}
     </div>

@@ -30,38 +30,46 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-zinc-900 shadow-lg border-b border-zinc-800">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/90 to-black/60 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Left Links */}
-        <div className="flex items-center space-x-6 text-white text-sm font-medium">
+        <div className="flex items-center space-x-8">
           <Link
             to="/"
-            className="flex items-center hover:text-cyan-400 transition"
+            className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent"
           >
-            <AiOutlineHome className="mr-1 text-lg" />
-            Home
+            MovieHub
           </Link>
-          <Link
-            to="/movies"
-            className="flex items-center hover:text-cyan-400 transition"
-          >
-            <MdOutlineLocalMovies className="mr-1 text-lg" />
-            Movies
-          </Link>
+          <div className="hidden md:flex items-center space-x-6">
+            <Link
+              to="/"
+              className="flex items-center space-x-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              <AiOutlineHome className="text-lg" />
+              <span>Home</span>
+            </Link>
+            <Link
+              to="/movies"
+              className="flex items-center space-x-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
+            >
+              <MdOutlineLocalMovies className="text-lg" />
+              <span>Movies</span>
+            </Link>
+          </div>
         </div>
 
         {/* Right Side */}
-        <div className="relative flex items-center space-x-4 text-white text-sm">
+        <div className="flex items-center space-x-6">
           {userInfo ? (
-            <div>
+            <div className="relative">
               <button
                 onClick={toggleDropdown}
-                className="flex items-center hover:text-cyan-400 transition"
+                className="flex items-center space-x-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
               >
-                <span className="mr-1">{userInfo.username}</span>
+                <span>{userInfo.username}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className={`h-4 w-4 transition-transform ${
+                  className={`h-4 w-4 transition-transform duration-200 ${
                     dropdownOpen ? 'rotate-180' : ''
                   }`}
                   fill="none"
@@ -78,53 +86,47 @@ const Navigation = () => {
               </button>
 
               {dropdownOpen && (
-                <ul className="absolute right-0 mt-3 w-48 bg-zinc-800 text-white rounded-md shadow-lg ring-1 ring-zinc-700 animate-fade-in z-50">
+                <div className="absolute right-0 mt-3 w-48 bg-[#1a1a1a] rounded-lg shadow-xl border border-white/10 overflow-hidden backdrop-blur-lg">
                   {userInfo.isAdmin && (
-                    <li>
-                      <Link
-                        to="/admin/movies/dashboard"
-                        className="block px-4 py-2 hover:bg-zinc-700"
-                      >
-                        Dashboard
-                      </Link>
-                    </li>
-                  )}
-                  <li>
                     <Link
-                      to="/profile"
-                      className="block px-4 py-2 hover:bg-zinc-700"
+                      to="/admin/movies/dashboard"
+                      className="block px-4 py-3 text-sm text-gray-300 hover:bg-white/10 transition-colors duration-200"
                     >
-                      Profile
+                      Dashboard
                     </Link>
-                  </li>
-                  <li>
-                    <button
-                      onClick={logoutHandler}
-                      className="block w-full text-left px-4 py-2 hover:bg-zinc-700"
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
+                  )}
+                  <Link
+                    to="/profile"
+                    className="block px-4 py-3 text-sm text-gray-300 hover:bg-white/10 transition-colors duration-200"
+                  >
+                    Profile
+                  </Link>
+                  <button
+                    onClick={logoutHandler}
+                    className="block w-full text-left px-4 py-3 text-sm text-gray-300 hover:bg-white/10 transition-colors duration-200"
+                  >
+                    Logout
+                  </button>
+                </div>
               )}
             </div>
           ) : (
-            <>
+            <div className="flex items-center space-x-4">
               <Link
                 to="/login"
-                className="flex items-center hover:text-cyan-400 transition"
+                className="flex items-center space-x-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-200"
               >
-                <AiOutlineLogin className="mr-1 text-lg" />
-                Login
+                <AiOutlineLogin className="text-lg" />
+                <span>Login</span>
               </Link>
               <Link
                 to="/register"
-                className="flex items-center hover:text-cyan-400 transition"
+                className="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg hover:opacity-90 transition-opacity duration-200"
               >
-                <AiOutlineUserAdd className="mr-1 text-lg" />
-                Register
+                <AiOutlineUserAdd className="text-lg" />
+                <span>Register</span>
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>

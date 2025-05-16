@@ -35,67 +35,88 @@ const MovieDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#121212] text-white px-4 py-8">
-      {/* Back Button */}
-      <div className="max-w-7xl mx-auto">
-        <Link
-          to="/"
-          className="inline-block mb-6 text-sm text-red-400 hover:underline"
-        >
-          ← Go Back
-        </Link>
-      </div>
-
-      {/* Movie Content */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Image */}
-        <div className="w-full">
+    <div className="min-h-screen pt-16 bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a]">
+      {/* Hero Section */}
+      <div className="relative h-[60vh] w-full overflow-hidden">
+        <div className="absolute inset-0">
           <img
             src={movie?.image}
             alt={movie?.name}
-            className="w-full rounded-lg shadow-lg object-cover"
+            className="w-full h-full object-cover"
           />
-        </div>
-
-        {/* Movie Info */}
-        <div className="flex flex-col justify-between">
-          <div>
-            <h2 className="text-4xl font-bold mb-4 text-red-500">
-              {movie?.name}
-            </h2>
-            <p className="text-sm text-gray-300 mb-6 leading-relaxed">
-              {movie?.detail}
-            </p>
-
-            <p className="text-gray-400 mb-2">
-              <span className="font-semibold text-white">Release Year:</span>{" "}
-              {movie?.year}
-            </p>
-
-            <div className="mb-4">
-              <p className="font-semibold text-white mb-2">Cast:</p>
-              <ul className="list-disc list-inside text-gray-300 space-y-1">
-                {movie?.cast?.map((c, i) => (
-                  <li key={i}>{c}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
         </div>
       </div>
 
-      {/* Tabs + Reviews */}
-      <div className="max-w-5xl mx-auto mt-12">
-        <MovieTabs
-          loadingMovieReview={loadingMovieReview}
-          userInfo={userInfo}
-          submitHandler={submitHandler}
-          rating={rating}
-          setRating={setRating}
-          comment={comment}
-          setComment={setComment}
-          movie={movie}
-        />
+      {/* Content Section */}
+      <div className="max-w-7xl mx-auto px-4 -mt-32 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-12">
+          {/* Left Column - Image */}
+          <div className="lg:w-1/3">
+            <img
+              src={movie?.image}
+              alt={movie?.name}
+              className="w-full rounded-lg shadow-2xl border-2 border-white/10"
+            />
+          </div>
+
+          {/* Right Column - Details */}
+          <div className="lg:w-2/3">
+            <Link
+              to="/"
+              className="inline-block mb-6 text-sm text-purple-400 hover:text-purple-300 transition-colors duration-200"
+            >
+              ← Back to Movies
+            </Link>
+
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              {movie?.name}
+            </h1>
+
+            <div className="space-y-6">
+              <p className="text-lg text-gray-300 leading-relaxed">
+                {movie?.detail}
+              </p>
+
+              <div className="space-y-4">
+                <div className="flex items-center space-x-2">
+                  <span className="text-gray-400">Release Year:</span>
+                  <span className="text-white">{movie?.year}</span>
+                </div>
+
+                {movie?.cast && movie.cast.length > 0 && (
+                  <div>
+                    <h3 className="text-lg font-semibold text-white mb-2">Cast</h3>
+                    <div className="flex flex-wrap gap-2">
+                      {movie.cast.map((actor, index) => (
+                        <span
+                          key={index}
+                          className="px-3 py-1 bg-[#2a2a2a] rounded-full text-sm text-gray-300"
+                        >
+                          {actor}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Reviews Section */}
+        <div className="mt-16">
+          <MovieTabs
+            loadingMovieReview={loadingMovieReview}
+            userInfo={userInfo}
+            submitHandler={submitHandler}
+            rating={rating}
+            setRating={setRating}
+            comment={comment}
+            setComment={setComment}
+            movie={movie}
+          />
+        </div>
       </div>
     </div>
   );

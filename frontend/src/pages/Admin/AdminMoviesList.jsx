@@ -5,7 +5,7 @@ const AdminMoviesList = () => {
   const { data: movies, isLoading, error } = useGetAllMoviesQuery();
 
   if (isLoading) {
-    return <div className="text-center py-8">Loading movies...</div>;
+    return <div className="text-center py-8 text-white/80">Loading movies...</div>;
   }
 
   if (error) {
@@ -13,44 +13,47 @@ const AdminMoviesList = () => {
   }
 
   return (
-    <div className="container mx-[9rem]">
-      <div className="flex flex-col md:flex-row">
-        <div className="p-3">
-          <div className="ml-[2rem] text-xl font-bold h-12">
+    <div className="container mx-auto px-4 py-8 bg-[#0a0a0a] min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent">
             All Movies ({movies?.length})
-          </div>
+          </h1>
+        </div>
 
-          <div className="flex flex-wrap justify-center md:justify-start gap-6 p-[2rem]">
-            {movies?.map((movie) => (
-              <Link
-                key={movie._id}
-                to={`/admin/movies/update/${movie._id}`}
-                className="block w-[18rem] overflow-hidden"
-              >
-                <div className="max-w-sm m-4 rounded-lg overflow-hidden shadow-lg bg-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {movies?.map((movie) => (
+            <Link
+              key={movie._id}
+              to={`/admin/movies/update/${movie._id}`}
+              className="transform transition-all duration-300 hover:scale-105"
+            >
+              <div className="rounded-xl overflow-hidden bg-[#1a1a1a] border border-white/10 shadow-lg hover:shadow-2xl transition-all duration-300">
+                <div className="relative h-48">
                   <img
                     src={movie.image}
                     alt={`Poster of ${movie.name}`}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="px-6 py-4 border-b border-gray-400">
-                    <div className="font-bold text-xl mb-2">{movie.name}</div>
-                  </div>
-
-                  <p className="text-gray-700 text-base px-6 pb-4">{movie.detail}</p>
-
-                  <div className="flex justify-center mb-[1rem]">
-                    <Link
-                      to={`/admin/movies/update/${movie._id}`}
-                      className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
-                    >
-                      Update Movie
-                    </Link>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-60"></div>
                 </div>
-              </Link>
-            ))}
-          </div>
+                
+                <div className="p-4 border-b border-white/10">
+                  <h2 className="font-bold text-xl mb-2 text-white">{movie.name}</h2>
+                </div>
+
+                <div className="p-4">
+                  <p className="text-white/70 text-sm line-clamp-2">{movie.detail}</p>
+                </div>
+
+                <div className="p-4 flex justify-end">
+                  <button className="bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold py-2 px-4 rounded-lg hover:opacity-90 transition-opacity duration-300">
+                    Update Movie
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

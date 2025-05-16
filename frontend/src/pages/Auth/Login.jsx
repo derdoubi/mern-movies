@@ -39,16 +39,21 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center px-4 py-12">
-      <section className="w-full max-w-md">
-        <div className="bg-zinc-900 p-8 rounded-xl shadow-2xl border border-zinc-800">
-          <h1 className="text-3xl font-bold text-cyan-400 text-center mb-8">Sign In</h1>
+    <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-md relative">
+        {/* Background Gradient Effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20 blur-3xl" />
+        
+        <section className="relative bg-[#1a1a1a] p-8 rounded-xl shadow-2xl border border-white/10 backdrop-blur-sm">
+          <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 text-center mb-8">
+            Welcome Back
+          </h1>
 
-          <form onSubmit={submitHandler} className="space-y-5">
+          <form onSubmit={submitHandler} className="space-y-6">
             {/* Email */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-1">
-                Email
+              <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
+                Email Address
               </label>
               <input
                 type="email"
@@ -56,14 +61,14 @@ const Login = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 text-white placeholder-zinc-500 
-                           rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
               />
             </div>
 
             {/* Password */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-zinc-300 mb-1">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200 mb-2">
                 Password
               </label>
               <input
@@ -72,8 +77,8 @@ const Login = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 text-white placeholder-zinc-500 
-                           rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition"
+                className="w-full px-4 py-3 bg-[#2a2a2a] border border-white/10 rounded-lg text-white placeholder-gray-400 
+                         focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
               />
             </div>
 
@@ -81,35 +86,30 @@ const Login = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-2 px-4 bg-cyan-600 hover:bg-cyan-700 transition-colors duration-300 
-                        rounded-md font-semibold text-white focus:outline-none focus:ring-2 
-                        focus:ring-offset-2 focus:ring-offset-zinc-900 focus:ring-cyan-500 disabled:opacity-60"
+              className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-blue-500 hover:opacity-90
+                      rounded-lg font-semibold text-white transition-all duration-200 
+                      focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 
+                      focus:ring-offset-[#1a1a1a] disabled:opacity-50"
             >
               {isLoading ? "Signing In..." : "Sign In"}
             </button>
 
-            {isLoading && <div className="flex justify-center mt-4"><Loader /></div>}
+            {isLoading && <div className="flex justify-center"><Loader /></div>}
           </form>
 
           {/* Footer */}
-          <p className="mt-6 text-center text-sm text-zinc-400">
-            New here?{" "}
+          <p className="mt-6 text-center text-sm text-gray-400">
+            New to MovieHub?{" "}
             <Link
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
-              className="text-cyan-400 hover:text-cyan-300 font-medium transition"
+              className="font-medium text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500 
+                       hover:opacity-80 transition-opacity"
             >
-              Register
+              Create an account
             </Link>
           </p>
-        </div>
-
-        {/* Optional Image Area */}
-        <img
-          src=""
-          alt=""
-          className="hidden md:block mt-6 mx-auto max-h-40 opacity-50"
-        />
-      </section>
+        </section>
+      </div>
     </div>
   );
 };

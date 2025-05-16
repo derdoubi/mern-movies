@@ -100,48 +100,50 @@ const CreateMovie = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white py-10 px-4 flex items-start justify-center">
-      <form className="w-full max-w-2xl bg-zinc-900 border border-zinc-800 rounded-xl shadow-2xl p-8 space-y-6">
-        <h1 className="text-3xl font-bold text-cyan-400 mb-6">Create New Movie</h1>
+    <div className="min-h-screen bg-[#0a0a0a] text-white py-10 px-4 flex items-start justify-center">
+      <form className="w-full max-w-2xl bg-[#1a1a1a] border border-white/10 rounded-xl shadow-xl p-8 space-y-6">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-8">
+          Create New Movie
+        </h1>
 
         <div>
-          <label className="block text-sm mb-1 text-zinc-300">Movie Name</label>
+          <label className="block text-sm mb-2 text-white/80">Movie Name</label>
           <input
             type="text"
             name="name"
             value={movieData.name}
             onChange={handleChange}
             placeholder="Enter movie name"
-            className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-4 py-2 bg-[#2a2a2a] border border-white/10 rounded-lg placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-white"
           />
         </div>
 
         <div>
-          <label className="block text-sm mb-1 text-zinc-300">Release Year</label>
+          <label className="block text-sm mb-2 text-white/80">Release Year</label>
           <input
             type="number"
             name="year"
             value={movieData.year}
             onChange={handleChange}
             placeholder="e.g. 2024"
-            className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-4 py-2 bg-[#2a2a2a] border border-white/10 rounded-lg placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-white"
           />
         </div>
 
         <div>
-          <label className="block text-sm mb-1 text-zinc-300">Description</label>
+          <label className="block text-sm mb-2 text-white/80">Description</label>
           <textarea
             name="detail"
             value={movieData.detail}
             onChange={handleChange}
             placeholder="Movie description"
             rows={4}
-            className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-4 py-2 bg-[#2a2a2a] border border-white/10 rounded-lg placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-white"
           ></textarea>
         </div>
 
         <div>
-          <label className="block text-sm mb-1 text-zinc-300">Cast (comma-separated)</label>
+          <label className="block text-sm mb-2 text-white/80">Cast (comma-separated)</label>
           <input
             type="text"
             name="cast"
@@ -150,17 +152,17 @@ const CreateMovie = () => {
               setMovieData({ ...movieData, cast: e.target.value.split(", ") })
             }
             placeholder="e.g. Tom Hanks, Emma Watson"
-            className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-4 py-2 bg-[#2a2a2a] border border-white/10 rounded-lg placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 text-white"
           />
         </div>
 
         <div>
-          <label className="block text-sm mb-1 text-zinc-300">Genre</label>
+          <label className="block text-sm mb-2 text-white/80">Genre</label>
           <select
             name="genre"
             value={movieData.genre}
             onChange={handleChange}
-            className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            className="w-full px-4 py-2 bg-[#2a2a2a] border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50"
           >
             {isLoadingGenres ? (
               <option>Loading...</option>
@@ -175,12 +177,12 @@ const CreateMovie = () => {
         </div>
 
         <div>
-          <label className="block text-sm mb-2 text-zinc-300">Upload Poster</label>
+          <label className="block text-sm mb-2 text-white/80">Upload Poster</label>
           <input
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-md file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-cyan-600 file:text-white hover:file:bg-cyan-500"
+            className="w-full px-3 py-2 bg-[#2a2a2a] border border-white/10 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gradient-to-r file:from-purple-600 file:to-blue-500 file:text-white hover:file:opacity-90"
           />
           {selectedImage && (
             <p className="text-xs text-green-400 mt-1">{selectedImage.name}</p>
@@ -191,7 +193,7 @@ const CreateMovie = () => {
           type="button"
           onClick={handleCreateMovie}
           disabled={isCreatingMovie || isUploadingImage}
-          className="w-full py-3 bg-cyan-600 hover:bg-cyan-500 transition rounded-md font-semibold text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-60"
+          className="w-full py-3 bg-gradient-to-r from-purple-600 to-blue-500 rounded-lg font-semibold text-white transition-all duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500/50 disabled:opacity-60"
         >
           {isCreatingMovie || isUploadingImage ? "Creating..." : "Create Movie"}
         </button>

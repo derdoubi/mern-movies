@@ -82,17 +82,19 @@ const GenreList = () => {
   };
 
   if (isLoading) {
-    return <div className="text-center py-8 text-blue-400">Loading genres...</div>;
+    return <div className="text-center py-8 text-white/80">Loading genres...</div>;
   }
 
   if (isError) {
-    return <div className="text-center py-8 text-rose-500">Error: {error.message}</div>;
+    return <div className="text-center py-8 text-red-500">Error: {error.message}</div>;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-800 text-slate-100 font-sans px-6 py-10">
-      <div className="max-w-3xl mx-auto bg-slate-700 p-8 rounded-lg shadow-2xl border-4 border-blue-400">
-        <h1 className="text-3xl font-bold text-blue-300 mb-6 text-center">🎬 Genre Management</h1>
+    <div className="min-h-screen bg-[#0a0a0a] text-white px-6 py-10">
+      <div className="max-w-3xl mx-auto bg-[#1a1a1a] p-8 rounded-xl shadow-xl border border-white/10">
+        <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent mb-8 text-center">
+          Genre Management
+        </h1>
 
         <GenreForm
           value={name}
@@ -101,26 +103,26 @@ const GenreList = () => {
           buttonText="Create"
         />
 
-        <hr className="my-8 border-blue-400" />
+        <div className="my-8 border-t border-white/10" />
 
         <div className="space-y-4">
           {genres?.map((genre) => (
             <div
               key={genre._id}
-              className="bg-slate-600 text-white px-6 py-4 rounded-lg shadow-md flex justify-between items-center border border-slate-400 hover:shadow-blue-300/20 transition duration-200"
+              className="bg-[#2a2a2a] px-6 py-4 rounded-lg flex justify-between items-center border border-white/10 hover:bg-[#2a2a2a]/80 transition-all duration-300"
             >
-              <span className="text-lg font-medium">{genre.name}</span>
+              <span className="text-lg font-medium text-white/90">{genre.name}</span>
 
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center space-x-4">
                 <button
                   onClick={() => {
                     setModalVisible(true);
                     setSelectedGenre(genre);
                     setUpdatingName(genre.name);
                   }}
-                  className="text-blue-300 hover:text-blue-200 font-semibold transition duration-150"
+                  className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-blue-500 text-white font-semibold hover:opacity-90 transition-opacity duration-300"
                 >
-                  ✏️ Edit
+                  Edit
                 </button>
                 <button
                   onClick={() => {
@@ -128,9 +130,9 @@ const GenreList = () => {
                       handleDeleteGenre();
                     }
                   }}
-                  className="text-rose-400 hover:text-rose-300 font-semibold transition duration-150"
+                  className="px-4 py-2 rounded-lg bg-red-500/10 text-red-500 font-semibold hover:bg-red-500/20 transition-all duration-300"
                 >
-                  🗑️ Delete
+                  Delete
                 </button>
               </div>
             </div>
@@ -139,13 +141,15 @@ const GenreList = () => {
       </div>
 
       <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
-        <GenreForm
-          value={updatingName}
-          setValue={setUpdatingName}
-          handleSubmit={handleUpdateGenre}
-          handleDelete={handleDeleteGenre}
-          buttonText="Update"
-        />
+        <div className="bg-[#1a1a1a] p-6 rounded-xl border border-white/10">
+          <GenreForm
+            value={updatingName}
+            setValue={setUpdatingName}
+            handleSubmit={handleUpdateGenre}
+            handleDelete={handleDeleteGenre}
+            buttonText="Update"
+          />
+        </div>
       </Modal>
     </div>
   );
